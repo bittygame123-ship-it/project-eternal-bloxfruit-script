@@ -7503,16 +7503,16 @@ function Luna:CreateWindow(WindowSettings)
 		tween(Main.Controls.Close.ImageLabel, {ImageColor3 = Color3.fromRGB(195,195,195)})
 	end)
 
-	-- UserInputService.InputBegan:Connect(function(input, gpe)
-	-- 	if gpe then return end
-	-- 	if Window.State then return end
-	-- 	if input.KeyCode == Window.Bind then
-	-- 		Unhide(Main, Window.CurrentTab)
-	-- 		LunaUI.MobileSupport.Visible = false
-	-- 		dragBar.Visible = true
-	-- 		Window.State = true
-	-- 	end
-	-- end)
+	UserInputService.InputBegan:Connect(function(input, gpe)
+		if gpe then return end
+		if Window.State then return end
+		if input.KeyCode == Window.Bind then
+			Unhide(Main, Window.CurrentTab)
+			LunaUI.MobileSupport.Visible = false
+			dragBar.Visible = true
+			Window.State = true
+		end
+	end)
 
 	Main.Logo.MouseButton1Click:Connect(function()
 		if Navigation.Size.X.Offset == 205 then
