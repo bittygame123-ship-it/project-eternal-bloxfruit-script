@@ -563,7 +563,7 @@ local function legacyPage(settings)
 					end
 				end
 			})
-			item = registerLegacyOption(title, "dropdown", multi and selectedMap or (currentOption[1] or ""), control, optionList)
+			item = registerLegacyOption(title, multi and "multi_toggle" or "dropdown", multi and selectedMap or (currentOption[1] or ""), control, optionList)
 			local function updateDropdown(value, colonValue)
 				if value == control then value = colonValue end
 				local nextSelection = {}
