@@ -6177,7 +6177,7 @@ SettingFarmMainSection.CreateSlider(
 	end
 )
 SettingFarmMainSection.CreateToggle(
-	{ Title = "Bring Mob", Desc = nil, Default = Settings["Bring Mob"] or true },
+	{ Title = "Bring Mob", Desc = nil, Default = Settings["Bring Mob"] ~= false },
 	function(I)
 		SaveSettings("Bring Mob", I)
 	end
