@@ -461,13 +461,13 @@ local function legacyPage(settings)
 	local page = {}
 	page.CreateSection = function(sectionTitle)
 		currentSectionName = tostring(sectionTitle or "Section")
-		tab:CreateSection(currentSectionName)
+		local uiSection = tab:CreateSection(currentSectionName)
 		local section = {}
 		section.CreateButton = function(controlSettings, callback)
 			controlSettings = controlSettings or {}
 			local title = tostring(controlSettings.Title or "Button")
 			local item = registerLegacyOption(title, "button", title, nil)
-			local control = tab:CreateButton({
+			local control = uiSection:CreateButton({
 				Name = title,
 				Description = controlSettings.Desc,
 				Callback = function()
@@ -482,7 +482,7 @@ local function legacyPage(settings)
 			local title = tostring(controlSettings.Title or "Toggle")
 			local initial = controlSettings.Default == true
 			local item
-			local control = tab:CreateToggle({
+			local control = uiSection:CreateToggle({
 				Name = title,
 				Description = controlSettings.Desc,
 				CurrentValue = initial,
@@ -538,7 +538,7 @@ local function legacyPage(settings)
 				if initial ~= nil and initial ~= "" then currentOption = {tostring(initial)} end
 			end
 			local item
-			local control = tab:CreateDropdown({
+			local control = uiSection:CreateDropdown({
 				Name = title,
 				Description = controlSettings.Desc,
 				Options = optionList,
@@ -592,7 +592,7 @@ local function legacyPage(settings)
 			local initial = tonumber(controlSettings.Default) or minimum
 			local increment = controlSettings.Precise and 0.1 or 1
 			local item
-			local control = tab:CreateSlider({
+			local control = uiSection:CreateSlider({
 				Name = title,
 				Range = {minimum, maximum},
 				Increment = increment,
@@ -613,7 +613,7 @@ local function legacyPage(settings)
 		section.CreateLabel = function(controlSettings)
 			controlSettings = controlSettings or {}
 			local title = tostring(controlSettings.Title or "Label")
-			local control = tab:CreateLabel({Text = title, Style = 1})
+			local control = uiSection:CreateLabel({Text = title, Style = 1})
 			local item = registerLegacyOption(title, "textlabel", title, control)
 			control.SetText = function(value) control:Set(tostring(value)); item.value = tostring(value) end
 			control.GetText = function() return item.value end
@@ -624,7 +624,7 @@ local function legacyPage(settings)
 			local title = tostring(controlSettings.Title or "Input")
 			local initial = controlSettings.Default
 			local item
-			local control = tab:CreateInput({
+			local control = uiSection:CreateInput({
 				Name = title,
 				Description = controlSettings.Desc,
 				PlaceholderText = controlSettings.Placeholder or "Type here",
@@ -648,7 +648,7 @@ local function legacyPage(settings)
 			controlSettings = controlSettings or {}
 			local title = tostring(controlSettings.Title or "Keybind")
 			local key = tostring(controlSettings.Key or Enum.KeyCode.K):gsub("^Enum%.KeyCode%.", "")
-			local control = tab:CreateBind({
+			local control = uiSection:CreateBind({
 				Name = title,
 				CurrentBind = key,
 				Callback = function() if callback then callback() end end
