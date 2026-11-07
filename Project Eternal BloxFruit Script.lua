@@ -688,6 +688,7 @@ Main = {
 }
 Options = LegacyOptions
 getgenv().Options = A.Options
+PageShop = Main.CreatePage({ Page_Name = "Shop", Page_Title = "Shop" })
 SectionShopMisc = PageShop.CreateSection("Misc Shop")
 function Remote(a, s, X)
 	if not a and X then
